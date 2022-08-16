@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-ssr-common-engine",
+            "outputPath": "dist/angular-ssr-common-engine/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -82,6 +82,41 @@
           "options": {
             "browserTarget": "Angular-SSR-Common-Engine:build"
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputHashing": "media",
+            "optimization": true,
+            "sourceMap": false,
+            "externalDependencies": ["jsdom", "canvas"]
+          },
+          "configurations": {
+            "express": {
+              "main": "server/express/server.ts",
+              "outputPath": "dist/Angular-SSR-Common-Engine/server/express",
+              "tsConfig": "tsconfig.server.express.json"
+            },
+            "fastify": {
+              "main": "server/fastify/server.ts",
+              "outputPath": "dist/Angular-SSR-Common-Engine/server/fastify",
+              "tsConfig": "tsconfig.server.fastify.json"
+            }
+          }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "express": {
+              "browserTarget": "Angular-SSR-Common-Engine:build:development",
+              "serverTarget": "Angular-SSR-Common-Engine:server:express"
+            },
+            "fastify": {
+              "browserTarget": "Angular-SSR-Common-Engine:build:development",
+              "serverTarget": "Angular-SSR-Common-Engine:server:fastify"
+            }
+          },
+          "defaultConfiguration": "express"
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",

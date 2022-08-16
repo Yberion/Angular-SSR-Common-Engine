@@ -1,0 +1,10 @@
+.menu {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: beige;
+
+  .menu__item:not(:last-child) {
+    padding-right: 15px;
+  }
+}
