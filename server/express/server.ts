@@ -19,8 +19,7 @@ export function app(): Express {
   server.set('views', DIST);
 
   server.get('*.*', express.static(DIST, {
-    maxAge: '1y',
-    fallthrough: false
+    maxAge: '1y'
   }));
 
   server.get('*', (req, res, next) => {

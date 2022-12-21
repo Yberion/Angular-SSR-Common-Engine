@@ -106,17 +106,21 @@
         },
         "serve-ssr": {
           "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "Angular-SSR-Common-Engine:build",
+            "serverTarget": "Angular-SSR-Common-Engine:server"
+          },
           "configurations": {
             "express": {
-              "browserTarget": "Angular-SSR-Common-Engine:build:development",
+              "browserTarget": "Angular-SSR-Common-Engine:build:production",
               "serverTarget": "Angular-SSR-Common-Engine:server:express"
             },
             "fastify": {
-              "browserTarget": "Angular-SSR-Common-Engine:build:development",
+              "browserTarget": "Angular-SSR-Common-Engine:build:production",
               "serverTarget": "Angular-SSR-Common-Engine:server:fastify"
             }
           },
-          "defaultConfiguration": "express"
+          "defaultConfiguration": "fastify"
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
