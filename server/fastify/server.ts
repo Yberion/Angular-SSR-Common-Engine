@@ -19,6 +19,8 @@ export function app(): FastifyInstance {
   server.register(fastifyStatic, {
     root: DIST,
     maxAge: '1y',
+    // If set to true it will create a '/' get route and we don't want that
+    index: false,
     // Need to be false, else we won't be able to create a wildcard route
     wildcard: false
   });
