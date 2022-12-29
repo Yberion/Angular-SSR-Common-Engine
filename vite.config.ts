@@ -16,7 +16,10 @@ export default defineConfig(({ mode }) => ({
     vite: {
       // tsconfig: 'tsconfig..json'
     },
-    ssr: true
+    ssr: true,
+    nitro: {
+      entry: __dirname + '/server/fastify/server.ts'
+    }
   })],
   test: {
     globals: true,
