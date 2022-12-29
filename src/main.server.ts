@@ -7,13 +7,23 @@
  */
 import '@angular/platform-server/init';
 
+import 'zone.js/node';
 import { enableProdMode } from '@angular/core';
+import { renderModule } from '@angular/platform-server';
 
+import { AppServerModule } from './app/app.server.module';
 import { environment } from './environments/environment';
 
 if (environment.production) {
   enableProdMode();
 }
 
-export { AppServerModule } from './app/app.server.module';
+export default async function render(url: string, document: string) {
+  const html = await renderModule(AppServerModule, {
+    document,
+    url,
+    extraProviders: [],
+  });
 
+  return html;
+}

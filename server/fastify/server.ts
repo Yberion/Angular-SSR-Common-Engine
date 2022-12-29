@@ -1,18 +1,22 @@
 import 'zone.js/dist/zone-node';
 
-import { AppServerModule } from '../../src/main.server';
+// import { AppServerModule } from '../../src/main.server';
 import { CommonEngine } from '@nguniversal/common/engine';
 import { APP_BASE_HREF } from '@angular/common';
+// @ts-ignore
+import ssrRenderer from '../../dist/ssr/main.server.mjs';
 
 import { join } from 'path';
 import fastify, { FastifyInstance } from 'fastify';
 import fastifyStatic from '@fastify/static';
+import { readFileSync } from 'fs';
 
 // The Fastify app is exported so that it can be used by serverless Functions.
 export function app(): FastifyInstance {
   const server = fastify();
-  const DIST = join(__dirname, '../../browser');
-  const INDEX_HTML = join(__dirname, '../../browser/index.html');
+  const DIST = join(__dirname, '../../../client');
+  const INDEX_HTML = join(__dirname, '../../../client/index.html');
+  const index = readFileSync(INDEX_HTML).toString('utf-8');
 
   const commonEngine = new CommonEngine();
 
@@ -29,14 +33,9 @@ export function app(): FastifyInstance {
     const baseURL =  req.protocol + '://' + req.headers.host;
     const url = new URL(req.url, baseURL);
 
-    commonEngine.render({
-      bootstrap: AppServerModule,
-      documentFilePath: INDEX_HTML,
-      url: url.href,
-      providers: [{ provide: APP_BASE_HREF, useValue: baseURL }]
-    })
-    .then((r) => res.type('text/html').send(r))
-    .catch(err => console.error(err));
+    ssrRenderer(url.href, index)
+      .then((r: string) => res.type('text/html').send(r))
+      .catch((err: unknown) => console.error(err));
   });
 
   return server;
