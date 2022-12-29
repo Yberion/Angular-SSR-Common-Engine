@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [analog({
     vite: {
-      tsconfig: 'tsconfig.server.fastify.json'
+      // tsconfig: 'tsconfig..json'
     },
     ssr: true
   })],
