@@ -11,7 +11,7 @@
     "build:server:fastify": "ng run Angular-SSR-Common-Engine:server:fastify",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "preview": "node dist/angular-ssr-common-engine/server/fastify/main.js"
+    "preview": "node dist/server/server/index.mjs"
   },
   "private": true,
   "dependencies": {
