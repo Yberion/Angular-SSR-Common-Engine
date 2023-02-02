@@ -67,12 +67,16 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "proxyConfig": "proxy.conf.js"
+          },
           "configurations": {
             "production": {
               "browserTarget": "Angular-SSR-Common-Engine:build:production"
             },
             "development": {
-              "browserTarget": "Angular-SSR-Common-Engine:build:development"
+              "browserTarget": "Angular-SSR-Common-Engine:build:development",
+              "proxyConfig": "proxy.conf.js"
             }
           },
           "defaultConfiguration": "development"

@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TestComponent } from './test/test.component';
 import { HomeComponent } from './home/home.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { HomeComponent } from './home/home.component';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ssr-common-engine' }),
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],

@@ -1,1 +1,9 @@
 <p>test2 works!</p>
+
+<ng-container *ngIf="this.randomChuckNorrisJoke$ | async as randomChuckNorrisJoke">
+    <p>Joke: {{ randomChuckNorrisJoke.value }}</p>
+</ng-container>
+
+<ng-container *ngIf="this.randomChuckNorrisJokeProxy$ | async as randomChuckNorrisJokeProxy">
+    <p>Joke proxy: {{ randomChuckNorrisJokeProxy.value }}</p>
+</ng-container>
