@@ -4,13 +4,17 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:ssr:express": "ng run Angular-SSR-Common-Engine:serve-ssr:express",
-    "start:ssr:fastify": "ng run Angular-SSR-Common-Engine:serve-ssr:fastify",
     "build": "ng build",
-    "build:server:express": "ng run Angular-SSR-Common-Engine:server:express",
-    "build:server:fastify": "ng run Angular-SSR-Common-Engine:server:fastify",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "start:ssr:express:development": "ng run Angular-SSR-Common-Engine:serve-ssr-express:development",
+    "start:ssr:express:production": "ng run Angular-SSR-Common-Engine:serve-ssr-express:production",
+    "start:ssr:fastify:development": "ng run Angular-SSR-Common-Engine:serve-ssr-fastify:development",
+    "start:ssr:fastify:production": "ng run Angular-SSR-Common-Engine:serve-ssr-fastify:production",
+    "build:server:express:development": "ng run Angular-SSR-Common-Engine:server-express:development",
+    "build:server:express:production": "ng run Angular-SSR-Common-Engine:server-express:production",
+    "build:server:fastify:development": "ng run Angular-SSR-Common-Engine:server-fastify:development",
+    "build:server:fastify:production": "ng run Angular-SSR-Common-Engine:server-fastify:production"
   },
   "private": true,
   "dependencies": {

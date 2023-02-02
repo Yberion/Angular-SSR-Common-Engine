@@ -1,12 +1,19 @@
 const minimist = require('minimist');
 
-console.info('INFO: Initializing proxy config.');
-
 // Shape: { _: [ 'run', 'dd:serve-ssr:local-dev' ] }
 const argv = minimist(process.argv.slice(2));
 
+console.info('INFO: Initializing proxy config.', argv);
+
 const proxyTargets = {
   'development': {
+    '/api/chuck-norris': {
+      pathRewrite: { '^/api/chuck-norris': '' },
+      target: 'https://api.chucknorris.io',
+      changeOrigin: true
+    }
+  },
+  'production': {
     '/api/chuck-norris': {
       pathRewrite: { '^/api/chuck-norris': '' },
       target: 'https://api.chucknorris.io',
@@ -56,4 +63,8 @@ function getProxyTarget(argv) {
   return selectedProxyTarget;
 }
 
-module.exports = getProxyTarget(argv);
+const proxyConfig = getProxyTarget(argv);
+
+console.info('Proxy config', proxyConfig);
+
+module.exports = proxyConfig;
