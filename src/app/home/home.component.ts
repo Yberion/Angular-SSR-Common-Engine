@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ChuckNorrisService } from '../shared/services/chuck-norris.service';
-import { ChuckNorrisJoke } from '../shared/services/models/chuck-norris/joke.model';
+import { ChuckNorrisJoke } from '../shared/models/chuck-norris/joke.model';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ export class HomeComponent implements OnInit {
   public randomChuckNorrisJokeProxy$!: Observable<ChuckNorrisJoke>;
 
   ngOnInit(): void {
-    this.randomChuckNorrisJoke$ = this.chuckNorrisService.getRandomJoke();
-    this.randomChuckNorrisJokeProxy$ = this.chuckNorrisService.getRandomJokeProxy();
+    this.randomChuckNorrisJoke$ = this.chuckNorrisService.getRandomJoke().pipe(tap((joke) => console.info(`joke: ${joke.value}`)));
+    this.randomChuckNorrisJokeProxy$ = this.chuckNorrisService.getRandomJokeProxy().pipe(tap((jokeProxy) => console.info(`joke proxy: ${jokeProxy.value}`)));
   }
 }
