@@ -68,6 +68,9 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
+            "ssl": true,
+            "sslCert": "ssl/server.crt",
+            "sslKey": "ssl/server.key",
             "proxyConfig": "proxy.conf.js"
           },
           "configurations": {
@@ -137,6 +140,9 @@
         "serve-ssr-express": {
           "builder": "@nguniversal/builders:ssr-dev-server",
           "options": {
+            "ssl": true,
+            "sslCert": "ssl/server.crt",
+            "sslKey": "ssl/server.key",
             "browserTarget": "Angular-SSR-Common-Engine:build",
             "serverTarget": "Angular-SSR-Common-Engine:server-express",
             "proxyConfig": "proxy.conf.js"
@@ -156,6 +162,9 @@
         "serve-ssr-fastify": {
           "builder": "@nguniversal/builders:ssr-dev-server",
           "options": {
+            "ssl": true,
+            "sslCert": "ssl/server.crt",
+            "sslKey": "ssl/server.key",
             "browserTarget": "Angular-SSR-Common-Engine:build",
             "serverTarget": "Angular-SSR-Common-Engine:server-fastify",
             "proxyConfig": "proxy.conf.js"

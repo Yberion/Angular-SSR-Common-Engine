@@ -10,7 +10,9 @@ const proxyTargets = {
     '/api/chuck-norris': {
       pathRewrite: { '^/api/chuck-norris': '' },
       target: 'https://api.chucknorris.io',
-      changeOrigin: true
+      changeOrigin: true,
+      secure: false,
+      logLevel: 'debug'
     }
   },
   'production': {
