@@ -23,14 +23,16 @@ export function app(): Express {
   }));
 
   server.get('*', (req, res, next) => {
-    const baseURL =  req.protocol + '://' + req.headers.host;
-    const url = new URL(req.url, baseURL);
+    const protocol = req.headers['x-forwarded-proto'] || req.protocol;
+    const hostname = req.headers['x-forwarded-host'] || req.headers['host'] || '';
+    const baseHref = protocol + '://' + hostname;
+    const nodeUrl = new URL(req.url, baseHref);
 
     commonEngine.render({
       bootstrap: AppServerModule,
       documentFilePath: INDEX_HTML,
-      url: url.href,
-      providers: [{ provide: APP_BASE_HREF, useValue: baseURL }]
+      url: nodeUrl.href,
+      providers: [{ provide: APP_BASE_HREF, useValue: baseHref }]
     })
     .then((r) => res.send(r))
     .catch(err => next(err));
